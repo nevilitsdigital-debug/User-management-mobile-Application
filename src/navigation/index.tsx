@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useSelector } from 'react-redux';
 import { Text } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import LoginScreen from '../screens/login/Login';
 import UserListScreen from '../screens/userList/UserList';
 import UserDetailsScreen from '../screens/userDetails/userDetails';
@@ -48,6 +49,8 @@ const MusicStack = () => {
 
 // Bottom Tab Navigator
 const BottomTabs = () => {
+  const insets = useSafeAreaInsets();
+  
   return (
     <Tab.Navigator
       screenOptions={{
@@ -58,9 +61,9 @@ const BottomTabs = () => {
           backgroundColor: '#fff',
           borderTopWidth: 1,
           borderTopColor: '#E0E0E0',
-          paddingBottom: 5,
+          paddingBottom: Math.max(insets.bottom, 5),
           paddingTop: 5,
-          height: 60,
+          height: 60 + Math.max(insets.bottom, 0),
         },
         tabBarLabelStyle: {
           fontSize: 12,
